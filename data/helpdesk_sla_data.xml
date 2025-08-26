@@ -1,0 +1,14 @@
+<odoo>
+  <data noupdate="1">
+    <record id="sla_rule_normal" model="helpdesk.sla.rule">
+      <field name="name">SLA Normal</field>
+      <field name="priority">1</field>
+      <field name="hours_deadline">24</field>
+    </record>
+    <record id="sla_rule_urgent" model="helpdesk.sla.rule">
+      <field name="name">SLA Urgente</field>
+      <field name="priority">3</field>
+      <field name="hours_deadline">2</field>
+    </record>
+  </data>
+</odoo>

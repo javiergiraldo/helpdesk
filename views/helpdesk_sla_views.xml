@@ -1,0 +1,38 @@
+<odoo>
+  <record id="view_helpdesk_sla_rule_tree" model="ir.ui.view">
+    <field name="name">helpdesk.sla.rule.tree</field>
+    <field name="model">helpdesk.sla.rule</field>
+    <field name="arch" type="xml">
+      <tree>
+        <field name="name"/>
+        <field name="category_id"/>
+        <field name="priority"/>
+        <field name="hours_deadline"/>
+      </tree>
+    </field>
+  </record>
+  <record id="view_helpdesk_sla_rule_form" model="ir.ui.view">
+    <field name="name">helpdesk.sla.rule.form</field>
+    <field name="model">helpdesk.sla.rule</field>
+    <field name="arch" type="xml">
+      <form>
+        <sheet>
+          <group>
+            <field name="name"/>
+            <field name="category_id"/>
+            <field name="priority"/>
+            <field name="hours_deadline"/>
+          </group>
+        </sheet>
+      </form>
+    </field>
+  </record>
+  <record id="action_sla_rules" model="ir.actions.act_window">
+    <field name="name">Reglas SLA</field>
+    <field name="res_model">helpdesk.sla.rule</field>
+    <field name="view_mode">tree,form</field>
+    <field name="help" type="html">
+      <p>Define las reglas de tiempo de respuesta según prioridad y categoría.</p>
+    </field>
+  </record>
+</odoo>

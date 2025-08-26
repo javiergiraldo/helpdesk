@@ -1,0 +1,16 @@
+<odoo>
+  <data noupdate="1">
+    <!-- Recordatorios: 1 hora antes del SLA -->
+    <record id="ir_cron_sla_reminder" model="ir.cron">
+      <field name="name">Recordatorio SLA Tickets</field>
+      <field name="model_id" ref="model_helpdesk_ticket"/>
+      <field name="state">code</field>
+      <field name="code">
+        model.search([('sla_deadline','&lt;', fields.Datetime.now()+fields.Date.to_timedelta(1,'h')),
+                      ('sla_deadline','&gt;', fields.Datetime.now())])._sla_send_reminders()
+      </field>
+      <field name="interval_number">30</field>
+      <field name="interval_type">minutes</field>
+    </record>
+  </data>
+</odoo>

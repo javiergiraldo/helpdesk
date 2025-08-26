@@ -1,0 +1,19 @@
+<odoo>
+    <data noupdate="1">
+        <!-- Categorías de ejemplo -->
+        <record id="cat_general" model="helpdesk.category">
+            <field name="name">General</field>
+        </record>
+        <record id="cat_tecnico" model="helpdesk.category">
+            <field name="name">Técnico</field>
+        </record>
+
+        <!-- Equipos de Soporte -->
+        <record id="team_soporte" model="helpdesk.team">
+            <field name="name">Soporte General</field>
+        </record>
+
+        <!-- SLA de ejemplo -->
+        <!-- Podemos ampliar con modelos SLA en caso de requerirlo -->
+    </data>
+</odoo>

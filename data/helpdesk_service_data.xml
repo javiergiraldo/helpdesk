@@ -1,0 +1,16 @@
+<odoo>
+  <data noupdate="1">
+    <record id="svc_general_setup" model="helpdesk.service">
+      <field name="name">Configuración General</field>
+      <field name="category_id" ref="cat_general"/>
+    </record>
+    <record id="svc_tech_network" model="helpdesk.service">
+      <field name="name">Redes y Conectividad</field>
+      <field name="category_id" ref="cat_tecnico"/>
+    </record>
+    <record id="svc_tech_hw" model="helpdesk.service">
+      <field name="name">Hardware</field>
+      <field name="category_id" ref="cat_tecnico"/>
+    </record>
+  </data>
+</odoo>

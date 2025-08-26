@@ -1,0 +1,117 @@
+<odoo>
+  <!-- 1. LISTADO DE TICKETS -->
+  <template id="portal_ticket_list" name="Listado de Tickets" website="True">
+    <t t-call="website.layout">
+      <div class="container mt16 mb16">
+        <!-- Cabecera con título y botón New -->
+        <div class="d-flex justify-content-between align-items-center mb-4">
+          <h1>Helpdesk</h1>
+          <a href="/helpdesk/create" class="btn btn-primary">Nuevo</a>
+        </div>
+        <!-- Tile de All Tickets -->
+        <div class="row mb-4">
+          <div class="col-md-3">
+            <div class="card text-white bg-info">
+              <div class="card-body">
+                <h5 class="card-title">Todos los Tickets</h5>
+                <p class="card-text">
+                  <t t-esc="request.env['helpdesk.ticket'].search_count([])"/>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Tabla de tickets -->
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Ticket</th>
+              <th>Título</th>
+              <th>Asignado a</th>
+            </tr>
+          </thead>
+          <tbody>
+            <t t-foreach="request.env['helpdesk.ticket'].search([])" t-as="ticket">
+              <tr>
+                <td>
+                  <a t-att-href="'/helpdesk/%d' % ticket.id">
+                    <t t-esc="ticket.name"/>
+                  </a>
+                </td>
+                <td><t t-esc="ticket.title"/></td>
+                <td><t t-esc="ticket.user_id.name or '-'"/></td>
+              </tr>
+            </t>
+          </tbody>
+        </table>
+        <!-- Botón Submit a Ticket -->
+        <a href="/helpdesk/create" class="btn btn-outline-secondary">Enviar un Ticket</a>
+      </div>
+    </t>
+  </template>
+
+  <!-- 2. DETALLE DE TICKET (plantilla original extendida) -->
+  <template id="portal_view" name="Portal Ticket" website="True">
+    <t t-call="website.layout">
+      <div class="container mt16 mb16">
+        <t t-if="ticket">
+          <!-- Encabezado -->
+          <h1>
+            <t t-esc="ticket.name"/> – <t t-esc="ticket.title"/>
+          </h1>
+          <!-- Datos clave -->
+          <dl class="row">
+            <dt class="col-sm-3">Asignado a</dt>
+            <dd class="col-sm-9"><t t-esc="ticket.user_id.name or '–'"/></dd>
+
+            <dt class="col-sm-3">Equipo</dt>
+            <dd class="col-sm-9"><t t-esc="ticket.team_id.name or '–'"/></dd>
+
+            <dt class="col-sm-3">Categoría</dt>
+            <dd class="col-sm-9"><t t-esc="ticket.category_id.name or '–'"/></dd>
+
+            <dt class="col-sm-3">Servicio</dt>
+            <dd class="col-sm-9"><t t-esc="ticket.service_id.name or '–'"/></dd>
+
+            <dt class="col-sm-3">SLA</dt>
+            <dd class="col-sm-9"><t t-esc="ticket.sla_rule_id.name or '–'"/></dd>
+
+            <dt class="col-sm-3">Creado el</dt>
+            <dd class="col-sm-9"><t t-esc="ticket.create_date"/></dd>
+
+            <dt class="col-sm-3">Última Actualización</dt>
+            <dd class="col-sm-9"><t t-esc="ticket.write_date"/></dd>
+
+            <dt class="col-sm-3">Estado</dt>
+            <dd class="col-sm-9">
+              <t t-esc="dict(ticket._fields['state'].selection).get(ticket.state)"/>
+            </dd>
+          </dl>
+          <!-- Attachments (tu llamada original) -->
+          <t t-call="helpdesk.ticket_attachment_id"/>
+          <!-- Botones de navegación -->
+          <div class="mt-4">
+            <a href="/helpdesk" class="btn btn-secondary mr-2">Volver a Tickets</a>
+            <a href="/helpdesk/create" class="btn btn-outline-primary">Enviar un Ticket</a>
+          </div>
+        </t>
+        <t t-else="">
+          <p>Ticket inválido o ticket no encontrado.</p>
+          <a href="/helpdesk" class="btn btn-outline-primary">Volver al listado</a>
+        </t>
+      </div>
+    </t>
+  </template>
+
+  <!-- 3. MENÚ ADICIONAL: Sobre nosotros / Contáctanos -->
+  <template id="helpdesk_nav_items" inherit_id="website.layout">
+    <xpath expr="//ul[contains(@class,'navbar-nav')]" position="inside">
+      <li class="nav-item">
+        <a class="nav-link" href="/about-us">Sobre nosotros</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/contact-us">Contáctanos</a>
+      </li>
+    </xpath>
+  </template>
+</odoo>

@@ -1,0 +1,9 @@
+<odoo>
+    <menuitem id="menu_helpdesk_root" name="Helpdesk"/>
+    <menuitem id="menu_helpdesk_tickets" name="Tickets"
+              parent="menu_helpdesk_root" action="action_helpdesk_ticket"/>
+    <menuitem id="menu_helpdesk_categories" name="Categorías"
+              parent="menu_helpdesk_root" action="action_helpdesk_category"/>
+    <menuitem id="menu_helpdesk_teams" name="Equipos"
+              parent="menu_helpdesk_root" action="action_helpdesk_team"/>
+</odoo>

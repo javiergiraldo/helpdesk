@@ -1,0 +1,22 @@
+<odoo>
+  <record id="view_helpdesk_dashboard" model="ir.ui.view">
+    <field name="name">helpdesk.dashboard</field>
+    <field name="model">helpdesk.ticket</field>
+    <field name="arch" type="xml">
+      <dashboard string="Helpdesk Dashboard">
+        <tile name="all_tickets" sequence="10" widget="statinfo">
+          <field name="id" type="count"/>
+          <field name="state" eval="'all_tickets'"/>
+          <field name="string">Todos los Tickets</field>
+        </tile>
+        <tile name="open_tickets" sequence="20" widget="statinfo">
+          <field name="id" type="count" domain="[('state','in',('new','open'))]"/>
+          <field name="string">Tickets Abiertos</field>
+        </tile>
+        <tile name="pending_tickets" sequence="30" widget="statinfo">
+          <field name="id" type="count" domain="[('state','=','pending')]"/>
+          <field name="string">Tickets Pendientes</field>
+        </tile>
+      </dashboard>
+    </field>
+  </record>
