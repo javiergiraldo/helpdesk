@@ -31,7 +31,7 @@ Este módulo extiende la gestión de tickets en Odoo 18 con un dashboard analít
     bash
     
     ```
-    git clone https://tu-repositorio.git helpdesk
+    git clone https://javiergiraldo/helpdesk.git
     ```
     
 2. Añade la ruta a `odoo.conf` en `addons_path`.
